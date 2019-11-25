@@ -1,4 +1,4 @@
-package com.oracle.littlechat.view;
+package com.oracle.littlechat.client.view;
 
 import java.awt.EventQueue;
 

@@ -1,7 +1,9 @@
-package com.oracle.littlechat.model;
+package com.oracle.littlechat.client.model;
 
 
-public class ChatUser {
+import java.io.Serializable;
+
+public class ChatUser  implements Serializable {
 
   private long username;
   private String password;

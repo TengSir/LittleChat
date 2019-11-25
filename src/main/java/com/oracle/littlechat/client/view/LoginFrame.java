@@ -1,17 +1,22 @@
-package com.oracle.littlechat.view;
+package com.oracle.littlechat.client.view;
 
 import java.awt.EventQueue;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class LoginFrame extends JFrame {
 
+	//has-a 优先使用组合，尽量少用继承
+	private Socket  client;
+
+	private ObjectOutputStream  out;
+	private ObjectInputStream  in;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
@@ -25,6 +30,7 @@ public class LoginFrame extends JFrame {
 				try {
 					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
+					frame.connectServer();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -69,5 +75,22 @@ public class LoginFrame extends JFrame {
 		JButton btnNewButton_1 = new JButton("\u6CE8\u518C");
 		btnNewButton_1.setBounds(140, 141, 71, 23);
 		contentPane.add(btnNewButton_1);
+		connectServer();
+
+
+	}
+
+	public void connectServer() {
+		//登陆界面底层持有的socket对象应该在构造器最后一行初始化（先要渲染界面，然后再建立底层通讯）
+		try {
+			client=new Socket("localhost",8888);
+			//因为为了更好的传递和处理消息，所以，项目中的任何消息都会封装成一个标准的ChatMessage对象
+			//所以，底层socket必须提供出序列化流（能将java对象写入通道的流）
+			out=new ObjectOutputStream(client.getOutputStream());
+			in=new ObjectInputStream(client.getInputStream());
+		} catch (IOException e) {
+			//一旦创建socket时出现异常，说明链接服务器失败，这里应该使用swing的ui技术弹出错误提示框
+			JOptionPane.showMessageDialog(this,"网络链接失败，请重试！","温馨提示",JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }
