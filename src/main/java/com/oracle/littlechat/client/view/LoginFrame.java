@@ -108,8 +108,9 @@ public class LoginFrame extends JFrame {
 
 				//5.消息发送给出去之后，就使用当前socket的输入流读取服务器给我回发的登陆结果消息
 				try {
-					ChatMessage  loginRestul=(ChatMessage)in.readObject();
-					if(loginRestul.getContent().equals("true")){
+					ChatMessage  loginResult=(ChatMessage)in.readObject();
+					System.out.println(loginResult.getFrom());
+					if(loginResult.getFrom()!=null){
 						MainFrame  m=new MainFrame();
 						m.setVisible(true);
 						LoginFrame.this.dispose();//释放当前登陆窗口的ui资源并隐藏当前窗口
