@@ -10,6 +10,20 @@ public class ChatUser  implements Serializable {
   private String nickname;
   private String sex;
   private long age;
+
+  @Override
+  public String toString() {
+    return "ChatUser{" +
+            "username=" + username +
+            ", password='" + password + '\'' +
+            ", nickname='" + nickname + '\'' +
+            ", sex='" + sex + '\'' +
+            ", age=" + age +
+            ", image='" + image + '\'' +
+            ", signature='" + signature + '\'' +
+            '}';
+  }
+
   private String image;
   private String signature;
 

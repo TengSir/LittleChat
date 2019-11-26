@@ -1,0 +1,16 @@
+@startuml
+interface AAA
+abstract User
+class Son
+AAA <|- User
+
+User <|--  Son
+AAA  <|- Son
+
+
+interface AAA{
+ public int age;
+ public void test();
+ }
+
+@enduml

@@ -1,11 +1,18 @@
 package com.oracle.littlechat.client.view;
 
+import com.oracle.littlechat.client.model.ChatMessage;
+import com.oracle.littlechat.client.model.ChatMessageType;
+import com.oracle.littlechat.client.model.ChatUser;
+
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -20,6 +27,7 @@ public class LoginFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	private JButton btnNewButton,btnNewButton_1;
 
 	/**
 	 * Launch the application.
@@ -68,15 +76,64 @@ public class LoginFrame extends JFrame {
 		passwordField.setBounds(99, 98, 105, 21);
 		contentPane.add(passwordField);
 		
-		JButton btnNewButton = new JButton("\u767B\u5F55");
+		btnNewButton = new JButton("\u767B\u5F55");
+		//给登陆按钮添加事件处理代码，
+
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//1.先获取用户在ui的输入框中输入的数据
+				String username=textField.getText().trim();
+				String password=new String(passwordField.getPassword());
+
+				//2.做表单验证吧
+
+				//3.将登陆必须的数据封装成一个Messagge对象
+				ChatMessage  loginMessage=new ChatMessage();
+					//封装一个聊天用户对象，将登陆的用户名和密码封装进去
+					ChatUser  user=new ChatUser();
+					user.setUsername(Long.parseLong(username));
+					user.setPassword(password);
+
+				loginMessage.setFrom(user);//设置消息的 发送人
+				loginMessage.setType(ChatMessageType.LOGIN);
+
+
+				//4.使用登陆界面持有的socket底层的输出流（序列化流），将刚刚封装好的消息对象发送出去
+				try {
+					out.writeObject(loginMessage);
+					out.flush();
+				} catch (IOException ex) {
+					JOptionPane.showMessageDialog(LoginFrame.this,"消息发送失败，请检查网络！","温馨提示",JOptionPane.ERROR_MESSAGE);
+				}
+
+				//5.消息发送给出去之后，就使用当前socket的输入流读取服务器给我回发的登陆结果消息
+				try {
+					ChatMessage  loginRestul=(ChatMessage)in.readObject();
+					if(loginRestul.getContent().equals("true")){
+						MainFrame  m=new MainFrame();
+						m.setVisible(true);
+						LoginFrame.this.dispose();//释放当前登陆窗口的ui资源并隐藏当前窗口
+					}else{
+						JOptionPane.showMessageDialog(LoginFrame.this,"登陆失败，请检查用户名和密码是否正确！","温馨提示",JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (IOException ex) {
+					ex.printStackTrace();
+				} catch (ClassNotFoundException ex) {
+					ex.printStackTrace();
+				}
+
+			}
+		});
 		btnNewButton.setBounds(54, 141, 71, 23);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_1 = new JButton("\u6CE8\u518C");
+		 btnNewButton_1 = new JButton("\u6CE8\u518C");
 		btnNewButton_1.setBounds(140, 141, 71, 23);
 		contentPane.add(btnNewButton_1);
-		connectServer();
 
+		//渲染整个窗口上的所有组件，保证所有组件显示成功
+		paintComponents(getGraphics());
+		paintAll(getGraphics());
 
 	}
 

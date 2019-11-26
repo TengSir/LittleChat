@@ -1,0 +1,46 @@
+@startuml
+
+
+footer Page %page% of %lastpage%
+
+title  <font size=24 color=purple>登陆业务模型时序图
+autonumber "<b>[00]"
+actor 用户 #red
+collections 客户端 #green
+用户 --\ 客户端: 打开客户端
+|||
+用户 --\ 客户端: <b>输入用户名和密\n<b>码点击登陆按钮
+== <b><font color=red>登陆业务开始 ==
+客户端 -> 客户端:
+activate 客户端 #lightskyblue
+deactivate 客户端
+note right  : 1.提取表单数据\n2.表单数据验证 \n3.将数据封装成\nMessagge对象
+entity 服务器 #blue
+客户端 O-[#blue]>O 服务器:<b><i><font color=blue>使用socket的序列化流\n<b><i><font color=blue>将Message对象写向服务器
+activate  服务器 #orange
+|||
+服务器 -> 服务器:
+note right :在服务器的接收消息的线程\n里中提取Message中登陆的\n用户名和密码数据
+|||
+activate 服务器 #green
+database  数据库 #orange
+服务器 O-->O 数据库 :然后服务器调用jdbc查询\n数据库是否存在该用户
+|||
+
+服务器 O<--O 数据库 :jdbc查询的结果返回到服务器端
+deactivate 服务器
+|||
+服务器 -> 服务器:
+note right :服务器根据查询的结果\n封装带有登陆结果的\nMessage对象
+|||
+|||
+客户端 O<[#red]-O 服务器:<b><i><font color=red>服务器使用对应的序列化流\n<b><i><font color=red>将Message发送给客户端
+|||
+deactivate 服务器
+
+客户端 ->客户端:客户端的反序列化流\n读取服务器回发的包含\n处理结果的Message对\n象,然后提取消息中的\n登陆结果
+activate 客户端 #lightskyblue
+deactivate 客户端
+客户端 O-\O 用户:客户端根据登陆的结果\n跳转主窗口或者提示错误\n将登陆的结果通知到用户
+==  <b><font color=green>登陆业务结束 ==
+@enduml
