@@ -1,6 +1,10 @@
 package com.oracle.littlechat.client.view;
 
+import com.oracle.littlechat.client.model.ChatUser;
+
 import java.awt.EventQueue;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,36 +14,26 @@ import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 public class ChatFrame extends JFrame {
+	private ChatUser  friend,my;
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ChatFrame frame = new ChatFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
 	 */
-	public ChatFrame() {
-		setTitle("\u804A\u5929\u7A97\u53E3");
+	public ChatFrame(ChatUser friend,ChatUser my) {
+		this.friend=friend;
+		this.my=my;
+		setTitle("和【"+friend.getNickname()+"】聊天中...");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 445);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setDefaultCloseOperation(HIDE_ON_CLOSE);//在聊天窗口上设置该窗口的关闭行为仅仅是隐藏这个窗口，而不推出整个程序
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 10, 414, 203);
@@ -54,6 +48,24 @@ public class ChatFrame extends JFrame {
 		contentPane.add(scrollPane_1);
 		
 		JTextArea textArea_1 = new JTextArea();
+		textArea_1.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode()==KeyEvent.VK_ENTER){
+					System.out.println("huiche ");
+				}
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+
+			}
+		});
 		scrollPane_1.setViewportView(textArea_1);
 		
 		JButton button = new JButton("\u53D1\u9001");

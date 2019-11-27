@@ -108,7 +108,8 @@ public class ChatServer {
                         }
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    System.out.println("客户端已经关闭聊天程序！");
+                   return ;
                 }
             }
         }

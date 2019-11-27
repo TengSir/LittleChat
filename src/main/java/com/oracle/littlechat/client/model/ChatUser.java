@@ -2,14 +2,45 @@ package com.oracle.littlechat.client.model;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class ChatUser  implements Serializable {
+  public Set<ChatUser> getFriends() {
+    return friends;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ChatUser chatUser = (ChatUser) o;
+    return username == chatUser.username &&
+            age == chatUser.age &&
+            Objects.equals(password, chatUser.password) &&
+            Objects.equals(nickname, chatUser.nickname) &&
+            Objects.equals(sex, chatUser.sex) &&
+            Objects.equals(friends, chatUser.friends) &&
+            Objects.equals(image, chatUser.image) &&
+            Objects.equals(signature, chatUser.signature);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(username, password, nickname, sex, age, friends, image, signature);
+  }
+
+  public void setFriends(Set<ChatUser> friends) {
+    this.friends = friends;
+  }
 
   private long username;
   private String password;
   private String nickname;
   private String sex;
   private long age;
+  private Set<ChatUser> friends=new HashSet<>();
 
   @Override
   public String toString() {

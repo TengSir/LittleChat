@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.*;
+import java.util.HashSet;
 import java.util.Properties;
+import java.util.Set;
 
 public class UserDAO {
     private Connection con;
@@ -75,7 +77,8 @@ public class UserDAO {
               u.setAge(rs.getInt("age"));
               u.setImage(rs.getString("image"));
               u.setSignature(rs.getString("signature"));
-
+              Set<ChatUser> users=getAllUsers(user.getUsername());
+              u.setFriends(users);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -105,5 +108,33 @@ public class UserDAO {
             e.printStackTrace();
         }
         return added;
+    }
+
+    /**
+     * 查询除了自己账号以外的所有聊天用户
+     * @param username
+     * @return
+     */
+    public Set<ChatUser> getAllUsers(long username){
+        Set<ChatUser> users=new HashSet<>();
+        PreparedStatement pre=getPre("select  * from chatuser where username !=?");
+        try {
+            pre.setLong(1,username);
+            ResultSet rs=pre.executeQuery();
+            while(rs.next()){
+                ChatUser u=new ChatUser();
+                u.setUsername(rs.getLong("username"));
+                u.setNickname(rs.getString("nickname"));
+                u.setSex(rs.getString("sex"));
+                u.setAge(rs.getInt("age"));
+                u.setImage(rs.getString("image"));
+                u.setSignature(rs.getString("signature"));
+                users.add(u);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            return users;
+        }
     }
 }

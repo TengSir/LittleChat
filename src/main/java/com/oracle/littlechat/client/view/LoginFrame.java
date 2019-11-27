@@ -36,6 +36,7 @@ public class LoginFrame extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					JFrame.setDefaultLookAndFeelDecorated(true);
 					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
 					frame.connectServer();
@@ -63,7 +64,7 @@ public class LoginFrame extends JFrame {
 		label.setBounds(54, 45, 35, 15);
 		contentPane.add(label);
 		
-		textField = new JTextField();
+		textField = new JTextField("10000");
 		textField.setBounds(99, 45, 105, 21);
 		contentPane.add(textField);
 		textField.setColumns(10);
@@ -72,7 +73,7 @@ public class LoginFrame extends JFrame {
 		label_1.setBounds(54, 98, 35, 15);
 		contentPane.add(label_1);
 		
-		passwordField = new JPasswordField();
+		passwordField = new JPasswordField("10000");
 		passwordField.setBounds(99, 98, 105, 21);
 		contentPane.add(passwordField);
 		
@@ -110,8 +111,9 @@ public class LoginFrame extends JFrame {
 				try {
 					ChatMessage  loginResult=(ChatMessage)in.readObject();
 					System.out.println(loginResult.getFrom());
+
 					if(loginResult.getFrom()!=null){
-						MainFrame  m=new MainFrame();
+						MainFrame  m=new MainFrame(loginResult.getFrom());
 						m.setVisible(true);
 						LoginFrame.this.dispose();//释放当前登陆窗口的ui资源并隐藏当前窗口
 					}else{
