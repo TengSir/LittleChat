@@ -1,5 +1,6 @@
 package com.oracle.littlechat.client.view;
 
+import com.oracle.littlechat.client.model.ChatMessage;
 import com.oracle.littlechat.client.model.ChatUser;
 
 import java.awt.EventQueue;
@@ -13,6 +14,10 @@ import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Date;
 import javax.swing.JTextArea;
 import javax.swing.ImageIcon;
 import javax.swing.JScrollPane;
@@ -21,7 +26,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 public class MainFrame extends JFrame {
 	private ChatUser user;
-
+	private ObjectOutputStream out;
+	private ObjectInputStream in;
 	private JPanel contentPane;
 	private JLabel lblNewLabel;
 	private final JLabel label;
@@ -32,7 +38,9 @@ public class MainFrame extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public MainFrame(ChatUser user) {
+	public MainFrame(ChatUser user,ObjectOutputStream  out,ObjectInputStream in) {
+		this.out=out;
+		this.in=in;
 		this.user=user;
 
 		setTitle("\u804A\u5929\u4E3B\u7A97\u53E3");
@@ -90,12 +98,36 @@ public class MainFrame extends JFrame {
 							}
 						}
 						System.out.println(friend);
-						ChatFrame  c=new ChatFrame(friend,user);
+						ChatFrame  c=new ChatFrame(friend,user,out,in);
 						c.setVisible(true);
 					}
 				}
 			}
 		});
 		scrollPane.setViewportView(tree);
+
+		//在主窗口的构造器最后一行开启一个接受服务器转发过来消息的线程（只有线程才能保证接受消息和ui功能互不影响）
+		class ReciveThread extends Thread{
+			@Override
+			public void run() {
+				while(true){
+					try {
+						ChatMessage  message=(ChatMessage) in.readObject();//read方法如果能读取到一条消息，说明服务器转发给我了一条别人发给我的消息
+						ChatFrame c=new ChatFrame(message.getFrom(),message.getTo(),out,in);
+						c.setVisible(true);
+						c.getTextArea().append(message.getFrom().getNickname()+"   "+message.getTime()+":\r\n"+message.getContent()+"\r\n\r\n");
+
+
+					} catch (IOException e) {
+						e.printStackTrace();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		ReciveThread recive=new ReciveThread();
+		recive.start();
+
 	}
 }

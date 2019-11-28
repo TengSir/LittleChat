@@ -13,6 +13,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 这是聊天软件的服务器类，用来对客户端提供聊天功能中的各种服务
@@ -25,6 +28,7 @@ public class ChatServer {
 
     private ServerSocket server;//定义一个serversocket对象，用来让客户端链接
     private UserDAO  dao;//定义一个user数据库操作对象
+    private Map<Long,ObjectOutputStream> allClients=new HashMap<>();//定义一个键值对集合，存储所有链接进来对用户对QQ号和它底层对应对输出流
 
     //1.在动态代码块中将，serversocket对象初始化。
     {
@@ -82,8 +86,15 @@ public class ChatServer {
                             //把登陆传过来的用户信息传入dao方法中，查询返回数据库里的用户对象
                             ChatUser user=dao.login(c.getFrom());
 
+                            //应该在登陆成功对时候，将当前用户的qq号和当前线程里面的socket输出流存储到服务器的集合中，方便后期服务器能找到这个人给他转发消息
+                            if(user!=null){
+                                allClients.put(user.getUsername(),out);
+                            }
+
                             //这里应该链接数据库判断用户名和密码的正确与否,同时将判断结果封装到一个Message对象中
                             ChatMessage  loginResult=new ChatMessage();
+
+
 
                             //将查询返回的用户对象存储到消息对象中，返回给登陆客户端
                             loginResult.setFrom(user);
@@ -99,7 +110,21 @@ public class ChatServer {
                             break;
                         }
                         case TEXT:{
-                            System.out.println("文本消息，服务器将会把这条消息转发给具体的聊天用户");
+                            //1.更新消息时间
+                            c.setTime(new Date().toLocaleString());
+                            //2.到服务器的那个所有客户端的集合里去找消息接受人是否在这个集合里
+                            long to=c.getTo().getUsername();//获取消息接受人的QQ号
+                            if(allClients.containsKey(to)){//if 说明从服务器的列表里找到了消息接受人（对方在线的）
+                                //既然找到这个用户了，就从服务器的集合里拿出这个消息接受用户的输出流，将消息发送给这个用户即可
+                               ObjectOutputStream out= allClients.get(to);
+                               out.writeObject(c);
+                               out.flush();
+                                System.out.println("对方在线，服务器已经将消息转发过去");
+                            }else{
+                                System.out.println("对方不在线，服务器不转发消息");
+                                //else说明对方不在线，这里可以熟悉额外的代码将消息暂存到数据库，等用户登陆后再提取（离线消息缓存）
+                            }
+                            //System.out.println("文本消息，服务器将会把这条消息转发给具体的聊天用户");
                             break;
                         }
                         case SHAKE:{

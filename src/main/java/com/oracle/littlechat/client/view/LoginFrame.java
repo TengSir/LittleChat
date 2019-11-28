@@ -113,7 +113,7 @@ public class LoginFrame extends JFrame {
 					System.out.println(loginResult.getFrom());
 
 					if(loginResult.getFrom()!=null){
-						MainFrame  m=new MainFrame(loginResult.getFrom());
+						MainFrame  m=new MainFrame(loginResult.getFrom(),out,in);
 						m.setVisible(true);
 						LoginFrame.this.dispose();//释放当前登陆窗口的ui资源并隐藏当前窗口
 					}else{
@@ -143,7 +143,7 @@ public class LoginFrame extends JFrame {
 	public void connectServer() {
 		//登陆界面底层持有的socket对象应该在构造器最后一行初始化（先要渲染界面，然后再建立底层通讯）
 		try {
-			client=new Socket("localhost",8888);
+			client=new Socket("172.19.22.83",8888);
 			//因为为了更好的传递和处理消息，所以，项目中的任何消息都会封装成一个标准的ChatMessage对象
 			//所以，底层socket必须提供出序列化流（能将java对象写入通道的流）
 			out=new ObjectOutputStream(client.getOutputStream());
