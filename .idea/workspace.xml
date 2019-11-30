@@ -8,17 +8,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="02c8925f-0b70-425c-abb4-7fc1fc6c0e26" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/LittleChat_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/Server_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/LittleChat.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/client/model/ChatMessageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/client/model/ChatMessageType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/control/ChatServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/control/ChatServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/model/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/model/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/model/ChatMessageType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/model/ChatMessageType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/ChatFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/ChatFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/MainFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/LoginFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/LoginFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/RegisterFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/RegisterFrame.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -72,7 +68,66 @@
     <favorites_list name="LittleChat" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/LoginFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="116">
+              <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+              <folding>
+                <element signature="e#724#725#0" expanded="true" />
+                <element signature="e#769#770#0" expanded="true" />
+                <element signature="e#796#797#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/RegisterFrame.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-125">
+              <caret line="213" column="68" selection-start-line="213" selection-start-column="68" selection-end-line="213" selection-end-column="68" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/control/ChatServer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="181">
+              <caret line="110" column="69" selection-start-line="110" selection-start-column="69" selection-end-line="110" selection-end-column="69" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="das://38aba058-be1a-4ff9-bd45-2c0735e893b7/schema/LittleChat/table/ChatUser">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state projectRestartId="c87d125d-2499-478f-a4a8-aaeba3da8a2d">
+              <filtering>
+                <filter text="" />
+              </filtering>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/model/UserDAO.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="14">
+              <caret line="94" column="19" selection-start-line="94" selection-start-column="19" selection-end-line="94" selection-end-column="19" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -98,6 +153,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>jdbc.</find>
+      <find>final</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -135,7 +191,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/files/LoginLoadData.puml" />
         <option value="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/model/ChatUser.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/client/model/ChatUser.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/LoginFrame.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/Server/src/main/java/META-INF/MANIFEST.MF" />
         <option value="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/ChatFrame.java" />
@@ -143,6 +198,8 @@
         <option value="$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/client/model/ChatMessageType.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/model/UserDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/MainFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/LoginFrame.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/RegisterFrame.java" />
         <option value="$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/control/ChatServer.java" />
       </list>
     </option>
@@ -161,8 +218,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="164" />
     <option name="y" value="23" />
-    <option name="width" value="1280" />
+    <option name="width" value="989" />
     <option name="height" value="701" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -174,7 +232,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -185,16 +242,78 @@
             <path>
               <item name="LittleChat" type="b2602c69:ProjectViewProjectNode" />
               <item name="LittleChat" type="462c0819:PsiDirectoryNode" />
-              <item name="target" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LittleChat" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="LittleChat" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleChat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleChat" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleChat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleChat" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleChat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleChat" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="control" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleChat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleChat" type="462c0819:PsiDirectoryNode" />
+              <item name="Server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleChat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleChat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleChat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleChat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleChat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleChat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleChat" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleChat" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -261,7 +380,7 @@
     </configuration>
     <configuration name="ChatServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.oracle.littlechat.server.control.ChatServer" />
-      <module name="Server" />
+      <module name="LittleChat.Server" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.oracle.littlechat.server.control.*" />
@@ -274,6 +393,19 @@
     </configuration>
     <configuration name="LoginFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.oracle.littlechat.client.view.LoginFrame" />
+      <module name="LittleChat" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.oracle.littlechat.client.view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RegisterFrame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.oracle.littlechat.client.view.RegisterFrame" />
       <module name="LittleChat" />
       <extension name="coverage">
         <pattern>
@@ -298,11 +430,13 @@
       <item itemvalue="Application.ChatFrame" />
       <item itemvalue="Application.ChatServer" />
       <item itemvalue="Application.LoginFrame" />
+      <item itemvalue="Application.RegisterFrame" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.LoginFrame" />
         <item itemvalue="Application.ChatServer" />
+        <item itemvalue="Application.RegisterFrame" />
         <item itemvalue="Application.ChatFrame" />
       </list>
     </recent_temporary>
@@ -332,7 +466,8 @@
       <workItem from="1574946334425" duration="263000" />
       <workItem from="1575014068419" duration="839000" />
       <workItem from="1575021975170" duration="7828000" />
-      <workItem from="1575072183491" duration="4480000" />
+      <workItem from="1575072183491" duration="8940000" />
+      <workItem from="1575102609302" duration="1509000" />
     </task>
     <task id="LOCAL-00001" summary="封装了消息bean和创建了底层的socket流">
       <created>1574685413788</created>
@@ -362,14 +497,22 @@
       <option name="project" value="LOCAL" />
       <updated>1574946567379</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="处理了接受消息窗口重复打开以及双击好友头像重复打开窗口的问题">
+      <created>1575080584979</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1575080584980</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62694000" />
+    <option name="totallyTimeSpent" value="68663000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="23" width="1440" height="793" extended-state="6" />
+    <frame x="0" y="23" width="1280" height="701" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Capture Tool" order="0" />
       <window_info id="UI Designer" order="1" />
@@ -377,27 +520,27 @@
       <window_info id="Image Layers" order="3" />
       <window_info id="MyBatis Builder" order="4" side_tool="true" />
       <window_info id="Designer" order="5" />
-      <window_info active="true" content_ui="combo" id="Project" order="6" visible="true" weight="0.24320458" />
+      <window_info content_ui="combo" id="Project" order="6" visible="true" weight="0.19709209" />
       <window_info id="Structure" order="7" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Console" order="0" weight="0.3267974" />
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="2" sideWeight="0.5013078" side_tool="true" weight="0.41543514" />
-      <window_info anchor="bottom" id="Messages" order="3" sideWeight="0.49956408" weight="0.3799435" />
+      <window_info anchor="bottom" id="Messages" order="3" sideWeight="0.49956408" weight="0.37931034" />
       <window_info anchor="bottom" id="Database Changes" order="4" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.44680852" />
       <window_info anchor="bottom" id="SQL Generator" order="6" weight="0.32903227" />
       <window_info anchor="bottom" id="Message" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Find" order="9" />
-      <window_info anchor="bottom" id="Run" order="10" sideWeight="0.49869224" visible="true" weight="0.3195435" />
-      <window_info anchor="bottom" id="Debug" order="11" weight="0.39869282" />
+      <window_info active="true" anchor="bottom" id="Run" order="10" sideWeight="0.49869224" visible="true" weight="0.3678161" />
+      <window_info anchor="bottom" id="Debug" order="11" weight="0.39800286" />
       <window_info anchor="bottom" id="Cvs" order="12" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="13" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="14" />
       <window_info anchor="right" id="PlantUML" order="0" weight="0.69951534" />
       <window_info anchor="right" id="Palette" order="1" />
       <window_info anchor="right" id="Capture Analysis" order="2" />
-      <window_info anchor="right" id="Database" order="3" weight="0.11731044" />
+      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.11712439" />
       <window_info anchor="right" id="Palette&#9;" order="4" />
       <window_info anchor="right" id="Theme Preview" order="5" />
       <window_info anchor="right" id="Maven" order="6" weight="0.32956383" />
@@ -455,7 +598,8 @@
     <MESSAGE value="实现了登陆功能的（尚未链接数据库）" />
     <MESSAGE value="实现了好友列表和双击打开好友聊天窗口的版本" />
     <MESSAGE value="已经实现了一对一单独聊天功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="已经实现了一对一单独聊天功能" />
+    <MESSAGE value="处理了接受消息窗口重复打开以及双击好友头像重复打开窗口的问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="处理了接受消息窗口重复打开以及双击好友头像重复打开窗口的问题" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
@@ -516,13 +660,6 @@
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/files/Collection.puml" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/RegisterFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-106">
-          <caret line="21" column="43" selection-start-line="21" selection-start-column="43" selection-end-line="21" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/client/model/ChatMessage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
@@ -636,13 +773,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/LoginFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="943">
-          <caret line="146" column="24" selection-start-line="146" selection-start-column="24" selection-end-line="146" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/ChatFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1106">
@@ -685,16 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/model/UserDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="146" column="19" selection-start-line="146" selection-start-column="19" selection-end-line="146" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-450">
@@ -706,19 +826,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/control/ChatServer.java">
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/src.zip!/javax/swing/BorderFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="37">
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
+        <state relative-caret-position="-613">
+          <caret line="58" column="25" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="25" />
+          <folding>
+            <element signature="e#1210#1211#0" expanded="true" />
+            <element signature="e#1257#1258#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/RegisterFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-125">
+          <caret line="213" column="68" selection-start-line="213" selection-start-column="68" selection-end-line="213" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/model/UserDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14">
+          <caret line="94" column="19" selection-start-line="94" selection-start-column="19" selection-end-line="94" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/main/java/com/oracle/littlechat/server/control/ChatServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="181">
+          <caret line="110" column="69" selection-start-line="110" selection-start-column="69" selection-end-line="110" selection-end-column="69" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/oracle/littlechat/client/view/LoginFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="25" column="38" selection-start-line="25" selection-start-column="38" selection-end-line="25" selection-end-column="38" />
+          <folding>
+            <element signature="e#724#725#0" expanded="true" />
+            <element signature="e#769#770#0" expanded="true" />
+            <element signature="e#796#797#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="das://38aba058-be1a-4ff9-bd45-2c0735e893b7/schema/LittleChat/table/ChatUser">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="733d506e-5283-4240-8697-c3be2d6b383b">
+        <state projectRestartId="c87d125d-2499-478f-a4a8-aaeba3da8a2d">
           <filtering>
             <filter text="" />
           </filtering>

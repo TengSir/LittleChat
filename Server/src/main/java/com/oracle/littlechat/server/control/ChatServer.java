@@ -106,6 +106,12 @@ public class ChatServer {
                         }
                         case REGISTER:{
                             System.out.println("注册消息，应该链接数据库添加新用户");
+
+                            boolean result=dao.register(c.getFrom());
+                            System.out.println("注册"+(result?"成功":"失败"));
+                            c.setContent(Boolean.toString(result));
+                            out.writeObject(c);
+                            out.flush();
                             break;
                         }
                         case TEXT:{

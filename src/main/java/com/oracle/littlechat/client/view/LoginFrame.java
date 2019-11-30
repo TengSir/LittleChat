@@ -3,6 +3,7 @@ package com.oracle.littlechat.client.view;
 import com.oracle.littlechat.client.model.ChatMessage;
 import com.oracle.littlechat.client.model.ChatMessageType;
 import com.oracle.littlechat.client.model.ChatUser;
+import sun.rmi.runtime.Log;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,14 @@ public class LoginFrame extends JFrame {
 
 	//has-a 优先使用组合，尽量少用继承
 	private Socket  client;
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public JPasswordField getPasswordField() {
+		return passwordField;
+	}
 
 	private ObjectOutputStream  out;
 	private ObjectInputStream  in;
@@ -131,6 +140,12 @@ public class LoginFrame extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		 btnNewButton_1 = new JButton("\u6CE8\u518C");
+		 //添加注册按钮监听事件，当点击注册按钮的时候打开注册窗口
+		btnNewButton_1.addActionListener(e->{
+			RegisterFrame r=new RegisterFrame(out,in, LoginFrame.this);
+			r.setVisible(true);
+			LoginFrame.this.setVisible(false);
+		});
 		btnNewButton_1.setBounds(140, 141, 71, 23);
 		contentPane.add(btnNewButton_1);
 
