@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -110,15 +109,18 @@ public class ChatServer {
                             break;
                         }
                         case TEXT:{
+                        }
+                        case SHAKE:{
+                            System.out.println("抖动消息和文本消息都执行如下代码，服务器将会把这条消息转发给具体的聊天用户");
                             //1.更新消息时间
                             c.setTime(new Date().toLocaleString());
                             //2.到服务器的那个所有客户端的集合里去找消息接受人是否在这个集合里
                             long to=c.getTo().getUsername();//获取消息接受人的QQ号
                             if(allClients.containsKey(to)){//if 说明从服务器的列表里找到了消息接受人（对方在线的）
                                 //既然找到这个用户了，就从服务器的集合里拿出这个消息接受用户的输出流，将消息发送给这个用户即可
-                               ObjectOutputStream out= allClients.get(to);
-                               out.writeObject(c);
-                               out.flush();
+                                ObjectOutputStream out= allClients.get(to);
+                                out.writeObject(c);
+                                out.flush();
                                 System.out.println("对方在线，服务器已经将消息转发过去");
                             }else{
                                 System.out.println("对方不在线，服务器不转发消息");
@@ -127,8 +129,21 @@ public class ChatServer {
                             //System.out.println("文本消息，服务器将会把这条消息转发给具体的聊天用户");
                             break;
                         }
-                        case SHAKE:{
-                            System.out.println("抖动消息，服务器将会把这条消息转发给具体的聊天用户");
+                        case GROUPTEXT:{
+                            System.out.println("这是群聊消息");
+                            c.setTime(new Date().toLocaleString());
+                            for( long  username:allClients.keySet()){
+                                if(username!=c.getFrom().getUsername()){
+                                    allClients.get(username).writeObject(c);
+                                    allClients.get(username).flush();
+                                }
+
+                            }
+                            break;
+                        }
+                        case UPDATENICKNAME:{
+                            boolean result=dao.updateNickname(c.getFrom());
+                            System.out.println("更新昵称"+(result?"成功":"失败"));
                             break;
                         }
                     }

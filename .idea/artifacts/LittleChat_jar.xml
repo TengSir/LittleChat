@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="LittleChat:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/LittleChat_jar</output-path>
+    <root id="archive" name="LittleChat.jar">
+      <element id="module-output" name="LittleChat" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/5.1.47/mysql-connector-java-5.1.47.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.10/lombok-1.18.10.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

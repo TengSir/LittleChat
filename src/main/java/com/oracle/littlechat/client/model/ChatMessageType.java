@@ -6,5 +6,7 @@ public enum ChatMessageType   implements Serializable {
     LOGIN,
     REGISTER,
     TEXT,
-    SHAKE
+    SHAKE,
+    GROUPTEXT,
+    UPDATENICKNAME
 }

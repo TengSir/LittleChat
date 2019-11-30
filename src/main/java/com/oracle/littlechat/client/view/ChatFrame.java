@@ -111,8 +111,73 @@ public class ChatFrame extends JFrame {
 		contentPane.add(btnFile);
 
 		btnEmoj = new JButton("emoj");
+		btnEmoj.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				textArea.append(my.getNickname()+"   "+new Date().toLocaleString()+":\r\n你给对方发送了一个窗口抖动...\r\n\r\n");
+				ChatFrame.this.shakeWindow();
+				//4.封装一个标准的Message对象
+				ChatMessage  message=new ChatMessage();
+				ChatUser  mysimple=new ChatUser();
+				mysimple.setUsername(my.getUsername());
+				mysimple.setNickname(my.getNickname());
+				message.setFrom(mysimple);
+				message.setTo(friend);
+				message.setType(ChatMessageType.SHAKE);
+
+				//5.使用底层的socket流将消息对象写入网络另外一端
+				try {
+					out.writeObject(message);
+					out.flush();
+				} catch (IOException ex) {
+					JOptionPane.showMessageDialog(ChatFrame.this,"消息发送失败！","温馨提示",JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		btnEmoj.setBounds(90, 222, 70, 23);
 		contentPane.add(btnEmoj);
+	}
+
+	public void shakeWindow(){
+		new Thread(){
+			@Override
+			public void run() {
+
+				int startX=ChatFrame.this.getX();
+				int startY=ChatFrame.this.getY();
+				int fudu=1;
+				int delay=20;
+				for(int n=0;n<50;n++){
+					ChatFrame.this.setLocation(startX-fudu,startY);
+					try {
+						Thread.sleep(delay);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					ChatFrame.this.setLocation(startX+fudu,startY);
+					try {
+						Thread.sleep(delay);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					ChatFrame.this.setLocation(startX,startY-fudu);
+					try {
+						Thread.sleep(delay);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					ChatFrame.this.setLocation(startX,startY+fudu);
+					try {
+						Thread.sleep(delay);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+				}
+				ChatFrame.this.setLocation(startX,startY);
+			}
+		}.start();
 	}
 
 }

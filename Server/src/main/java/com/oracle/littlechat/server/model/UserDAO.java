@@ -137,4 +137,23 @@ public class UserDAO {
             return users;
         }
     }
+
+
+    /**
+     * 更新用户昵称的方法
+     * @param user
+     * @return
+     */
+    public boolean updateNickname(ChatUser user){
+        boolean result=false;
+        PreparedStatement pre=getPre("update chatuser set nickname=? where username=?");
+        try {
+            pre.setLong(2,user.getUsername());
+            pre.setString(1 ,user.getNickname());
+            result=pre.executeUpdate()>0?true:false;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 }
