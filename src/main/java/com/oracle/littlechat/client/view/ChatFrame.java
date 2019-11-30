@@ -26,14 +26,50 @@ public class ChatFrame extends JFrame {
 	private ObjectOutputStream out;
 	private ObjectInputStream in;
 	private JPanel contentPane;//Field字段（属性）
-	private final JScrollPane scrollPane;
-	private final JTextArea textArea;
-	private final JScrollPane scrollPane_1;
-	private final JTextArea textArea_1;
-	private final JButton button;
-	private final JButton button_1;
-	private final JButton btnFile;
-	private final JButton btnEmoj;
+	private  JScrollPane scrollPane;
+	private  JTextArea textArea;
+	private  JScrollPane scrollPane_1;
+	private  JTextArea textArea_1;
+	private  JButton button;
+	private  JButton button_1;
+	private  JButton btnFile;
+	private  JButton btnEmoj;
+
+
+	public ChatFrame(ChatUser user,ObjectOutputStream out,ObjectInputStream in){
+		this(null,user,out,in);
+		setTitle("和所有人群聊中...");
+		button.removeActionListener(button.getActionListeners()[0]);
+		button.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				//1.先获取编辑的消息文字
+				String editMessage=textArea_1.getText();
+				//2.将我要发送的消息显示到上面的聊天框里
+
+				textArea.append(my.getNickname()+"   "+new Date().toLocaleString()+":\r\n"+editMessage+"\r\n\r\n");
+				//3.清空消息编辑框（输入框）
+				textArea_1.setText("");
+				//4.封装一个标准的Message对象
+				ChatMessage  message=new ChatMessage();
+				ChatUser  mysimple=new ChatUser();
+				mysimple.setUsername(my.getUsername());
+				mysimple.setNickname(my.getNickname());
+				message.setFrom(mysimple);
+				message.setType(ChatMessageType.GROUPTEXT);
+				message.setContent(editMessage);
+				//5.使用底层的socket流将消息对象写入网络另外一端
+				try {
+					out.writeObject(message);
+					out.flush();
+				} catch (IOException ex) {
+					JOptionPane.showMessageDialog(ChatFrame.this,"消息发送失败！","温馨提示",JOptionPane.ERROR_MESSAGE);
+				}
+
+
+			}
+		});
+	}
 
 
 	/**
@@ -44,6 +80,7 @@ public class ChatFrame extends JFrame {
 		this.in=in;
 		this.friend=friend;
 		this.my=my;
+		if(friend!=null)
 		setTitle("和【"+friend.getNickname()+"】聊天中...");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 445);

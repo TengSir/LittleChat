@@ -143,7 +143,6 @@ public class ChatServer {
                                     allClients.get(username).writeObject(c);
                                     allClients.get(username).flush();
                                 }
-
                             }
                             break;
                         }
