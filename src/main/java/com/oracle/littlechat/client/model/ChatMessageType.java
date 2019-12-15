@@ -8,5 +8,8 @@ public enum ChatMessageType   implements Serializable {
     TEXT,
     SHAKE,
     GROUPTEXT,
-    UPDATENICKNAME
+    UPDATENICKNAME,
+    FILE,
+    FILEISRECIVE,
+    TRANSFILE
 }

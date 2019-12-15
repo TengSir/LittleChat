@@ -15,9 +15,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +31,8 @@ public class MainFrame extends JFrame {
 	private  JTextArea textArea;
 	private  JScrollPane scrollPane;
 	private  JTree tree;
-	private String lastnickname;
+	private String lastnickname,savePath;
+	private JFileChooser  selectPath=new JFileChooser();
 	private Map<Long,ChatFrame> allChatFrames=new HashMap<>();//这个集合的作用是用来存储打开过的聊天窗口，这样每次重复打开某一个用户的 聊天界面时就不用每次新建一个了
 
 	/**
@@ -128,6 +127,7 @@ public class MainFrame extends JFrame {
 								allChatFrames.get(00000L).setVisible(true);//如果之前打开过，则直接从集合里获取这个账号对应的chat窗口对象，直接调用setvisiable显示它
 							} else {
 								ChatFrame c = new ChatFrame(user, out, in);
+								c.setLocationRelativeTo(null);
 								c.setVisible(true);
 								allChatFrames.put(00000L, c);//如果之前没有打开过，执行上面的打开新聊天窗口的代码，打开后，再将这个窗口存入到集合中
 							}
@@ -147,6 +147,7 @@ public class MainFrame extends JFrame {
 								allChatFrames.get(Long.parseLong(username)).setVisible(true);//如果之前打开过，则直接从集合里获取这个账号对应的chat窗口对象，直接调用setvisiable显示它
 							} else {
 								ChatFrame c = new ChatFrame(friend, user, out, in);
+								c.setLocationRelativeTo(null);
 								c.setVisible(true);
 								allChatFrames.put(Long.parseLong(username), c);//如果之前没有打开过，执行上面的打开新聊天窗口的代码，打开后，再将这个窗口存入到集合中
 							}
@@ -206,6 +207,99 @@ public class MainFrame extends JFrame {
 									//动态往聊天窗口上添加消息后，文本框不会自动该滚动到底部，执行如下代码滚动条自动滚动到地步
 									friendChatFrame.getTextArea().setSelectionStart(friendChatFrame.getTextArea().getText().length());//设置光标移动到文本框最后一个文字后面
 									friendChatFrame.shakeWindow();//调用窗口的shake方法，执行抖动
+									break;
+								}
+								case FILE: {
+									String noticeMessage="您的好友["+message.getFrom().getNickname()+"]给你发送文件：\r\n["+message.getContent().split(",")[0]+"]\r\n您是否接受？";
+								    int yourChoice=JOptionPane.showConfirmDialog(friendChatFrame,noticeMessage,"温馨提示",JOptionPane.OK_CANCEL_OPTION,JOptionPane.INFORMATION_MESSAGE);
+
+								    ChatMessage  fileReciveResult=new ChatMessage();
+									fileReciveResult.setType(ChatMessageType.FILEISRECIVE);
+									fileReciveResult.setFrom(user);
+									fileReciveResult.setTo(message.getFrom());
+									fileReciveResult.setTime(message.getContent().split(",")[1]);
+								    if(yourChoice==0){//说明选择了接受
+										System.out.println("选择了同意接受");
+
+										selectPath.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+										selectPath.showSaveDialog(friendChatFrame);
+										savePath=selectPath.getSelectedFile().getAbsolutePath()+"/"+message.getContent().split(",")[0];
+										System.out.println("客户端选择将文件保存在"+savePath);
+										fileReciveResult.setContent("true");
+									}else{//说明选择了取消
+										fileReciveResult.setContent("false");
+									}
+								    out.writeObject(fileReciveResult);
+								    out.flush();
+									break;
+								}
+								case FILEISRECIVE: {
+									if(message.getContent().equals("true")){//对方同意接受文件，这里使用objectOutputstream的方法将字节发送出去
+										System.out.println("接收到对方同意的消息，这里开始执行传送数据的代码");
+										friendChatFrame.getFileTransFrame().sendFileData();//当主界面接收到对方同意的消息后开始调用文件发送窗口中的方法，直接将文件传送给客户端
+									}
+									break;
+								}
+								case TRANSFILE: {
+										System.out.println("这个消息说明正式接到服务器推送的发送文件的消息，准备调用读取文件数据的方法，将文件接受并保存到本地");
+										JDialog  transDialog=new JDialog();
+										transDialog.setTitle("正在接受["+message.getFrom().getNickname()+"]发送的文件");
+										transDialog.setSize(260,100);
+										transDialog.requestFocus();
+										transDialog.requestFocusInWindow();
+										transDialog.setResizable(false);
+										transDialog.setVisible(true);
+										transDialog.setLayout(null);
+										transDialog.setModal(true);
+										transDialog.setLocationRelativeTo(friendChatFrame);
+										JLabel  filename=new JLabel("文件名:"+message.getContent());
+										filename.setBounds(10,5,240,20);
+										transDialog.add(filename);
+										final JProgressBar  progressBar=new JProgressBar(0,0,100);
+										progressBar.setBounds(10,30,240,40);
+										transDialog.add(progressBar);
+
+										System.out.println("开始接受文件数据:");
+
+										FileOutputStream   fileOutputStream= null;
+										try {
+											fileOutputStream = new FileOutputStream(savePath);
+											long fullsize=Long.parseLong(message.getTime());
+											int transUnitLength=1024;
+											long transCount=fullsize/transUnitLength;
+											long leftDataSize=fullsize%transUnitLength;
+											long transedSize=0;
+											for(long n=0;n<transCount;n++){
+												byte[] bs=new byte[transUnitLength];
+												int length=in.read(bs);
+												transedSize+=length;
+//												System.out.println("接到服务器转过来的文件字节："+length);
+//														System.out.println("总大小："+fullsize+"\t\t传输大小:"+transedSize);
+												progressBar.setBorder(BorderFactory.createTitledBorder("传输比例："+Math.round(transedSize*100/fullsize)+"%"));
+												progressBar.setValue(Math.round(transedSize*100/fullsize));
+												fileOutputStream.write(bs,0,length);
+												fileOutputStream.flush();
+											}
+
+											byte[] bs=new byte[(int)leftDataSize];
+											int length=in.read(bs);
+											transedSize+=length;
+//												System.out.println("接到服务器转过来的文件字节："+length);
+//														System.out.println("总大小："+fullsize+"\t\t传输大小:"+transedSize);
+											progressBar.setBorder(BorderFactory.createTitledBorder("传输比例："+Math.round(transedSize*100/fullsize)+"%"));
+											progressBar.setValue(Math.round(transedSize*100/fullsize));
+											fileOutputStream.write(bs,0,length);
+											fileOutputStream.flush();
+											fileOutputStream.close();
+                                            transDialog.dispose();
+                                            JOptionPane.showMessageDialog(friendChatFrame,"文件传输完毕！","温馨提示",JOptionPane.INFORMATION_MESSAGE);
+											System.out.println("文件接受保存完毕完毕");
+										} catch (Exception e) {
+											e.printStackTrace();
+										}
+
+
+
 									break;
 								}
 							}

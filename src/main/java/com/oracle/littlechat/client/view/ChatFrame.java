@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -34,6 +35,14 @@ public class ChatFrame extends JFrame {
 	private  JButton button_1;
 	private  JButton btnFile;
 	private  JButton btnEmoj;
+
+	public FileTransFrame getFileTransFrame() {
+		return fileTransFrame;
+	}
+
+	public FileTransFrame   fileTransFrame;
+
+
 
 
 	public ChatFrame(ChatUser user,ObjectOutputStream out,ObjectInputStream in){
@@ -83,6 +92,7 @@ public class ChatFrame extends JFrame {
 		if(friend!=null)
 		setTitle("和【"+friend.getNickname()+"】聊天中...");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 450, 445);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -144,6 +154,14 @@ public class ChatFrame extends JFrame {
 		contentPane.add(button_1);
 
 		btnFile = new JButton("file");
+		btnFile.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				  fileTransFrame=new FileTransFrame(friend,my,out,in);
+					fileTransFrame.setLocationRelativeTo(ChatFrame.this);
+				  fileTransFrame.setVisible(true);
+			}
+		});
 		btnFile.setBounds(10, 222, 70, 23);
 		contentPane.add(btnFile);
 

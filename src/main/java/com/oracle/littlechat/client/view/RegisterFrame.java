@@ -58,6 +58,7 @@ public class RegisterFrame extends JFrame {
 		setResizable(false);
 		setTitle("\u804A\u5929\u6CE8\u518C\u7A97\u53E3");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 301, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -210,7 +211,8 @@ public class RegisterFrame extends JFrame {
 				if(result.getContent().equals("true")){
 					JOptionPane.showMessageDialog(RegisterFrame.this,"注册成功!","温馨提示",JOptionPane.INFORMATION_MESSAGE);
 					loginFrame.setVisible(true);
-					loginFrame.getTextField().setText(username);
+					loginFrame.getTextField().addItem(Long.parseLong(username));
+					loginFrame.getTextField().setSelectedItem(Long.parseLong(username));
 					loginFrame.getPasswordField().setText(password);
 					RegisterFrame.this.setVisible(false);
 				}else{

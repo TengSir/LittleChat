@@ -8,6 +8,8 @@ import sun.rmi.runtime.Log;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -23,7 +25,7 @@ public class LoginFrame extends JFrame {
 	//has-a 优先使用组合，尽量少用继承
 	private Socket  client;
 
-	public JTextField getTextField() {
+	public JComboBox<Long> getTextField() {
 		return textField;
 	}
 
@@ -34,7 +36,7 @@ public class LoginFrame extends JFrame {
 	private ObjectOutputStream  out;
 	private ObjectInputStream  in;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JComboBox<Long> textField;
 	private JPasswordField passwordField;
 	private JButton btnNewButton,btnNewButton_1;
 
@@ -48,6 +50,7 @@ public class LoginFrame extends JFrame {
 					JFrame.setDefaultLookAndFeelDecorated(true);
 					LoginFrame frame = new LoginFrame();
 					frame.setVisible(true);
+					frame.setLocationRelativeTo(null);
 					frame.connectServer();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,6 +66,7 @@ public class LoginFrame extends JFrame {
 		setResizable(false);
 		setTitle("\u804A\u5929\u767B\u5F55\u7A97\u53E3");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 268, 247);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,11 +77,19 @@ public class LoginFrame extends JFrame {
 		label.setBounds(54, 45, 35, 15);
 		contentPane.add(label);
 		
-		textField = new JTextField("10000");
+		textField = new JComboBox<>();
+		for (long n=10000L;n<=10010L;n++){
+			textField.addItem(n);
+		}
+		textField.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				passwordField.setText(e.getItem().toString());
+			}
+		});
 		textField.setBounds(99, 45, 105, 21);
 		contentPane.add(textField);
-		textField.setColumns(10);
-		
+
 		JLabel label_1 = new JLabel("\u5BC6\u7801");
 		label_1.setBounds(54, 98, 35, 15);
 		contentPane.add(label_1);
@@ -92,7 +104,7 @@ public class LoginFrame extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//1.先获取用户在ui的输入框中输入的数据
-				String username=textField.getText().trim();
+				String username=textField.getSelectedItem().toString();
 				String password=new String(passwordField.getPassword());
 
 				//2.做表单验证吧
